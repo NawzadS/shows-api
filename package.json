@@ -1,0 +1,22 @@
+{
+  "name": "shows-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "setup": "node database/setup.js",
+    "seed": "node database/seed.js",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "sequelize": "^6.37.1",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
