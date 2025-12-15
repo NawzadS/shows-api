@@ -71,10 +71,17 @@ app.get("/api/seasons/:id/episodes", async (req, res) => {
    Start Server
 ========================= */
 sequelize
-  .sync()
-  .then(() => {
+  .sync({ force: true })
+  .then(async () => {
+    // Seed data for production
+    await Show.create({
+      title: "Sample Show",
+      genre: "Drama",
+      rating: 9
+    });
+
     app.listen(PORT, () => {
-      console.log(`Shows API running on port ${PORT}`);
+      console.log(`✅ Shows API running on port ${PORT}`);
     });
   })
   .catch((err) => {
