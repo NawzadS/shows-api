@@ -1,0 +1,52 @@
+﻿{
+  "info": {
+    "name": "Shows API MVP",
+    "_postman_id": "00000000-0000-0000-0000-000000000000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    { "name": "Health", "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/health", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","health"] } } },
+
+    { "name": "Shows - GET all", "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/shows", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","shows"] } } },
+    { "name": "Shows - GET one", "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/shows/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","shows","1"] } } },
+    {
+      "name": "Shows - POST",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"title\": \"New Show\",\n  \"genre\": \"Drama\",\n  \"rating\": 8\n}" },
+        "url": { "raw": "http://localhost:3000/api/shows", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","shows"] }
+      }
+    },
+    {
+      "name": "Shows - PUT",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"rating\": 10\n}" },
+        "url": { "raw": "http://localhost:3000/api/shows/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","shows","1"] }
+      }
+    },
+    { "name": "Shows - DELETE", "request": { "method": "DELETE", "url": { "raw": "http://localhost:3000/api/shows/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","shows","1"] } } },
+
+    {
+      "name": "Seasons - POST",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"seasonNumber\": 1,\n  \"showId\": 1\n}" },
+        "url": { "raw": "http://localhost:3000/api/seasons", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","seasons"] }
+      }
+    },
+
+    {
+      "name": "Episodes - POST",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"title\": \"Episode Title\",\n  \"duration\": 45,\n  \"seasonId\": 1\n}" },
+        "url": { "raw": "http://localhost:3000/api/episodes", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","episodes"] }
+      }
+    }
+  ]
+}

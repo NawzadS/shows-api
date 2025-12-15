@@ -1,30 +1,18 @@
-const { Sequelize } = require("sequelize");
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: process.env.DB_NAME
-});
+﻿const { sequelize } = require("./db");
 
-const Show = require("./models/Show")(sequelize);
-const Season = require("./models/Season")(sequelize);
-const Episode = require("./models/Episode")(sequelize);
+const ShowModel = require("./models/Show");
+const SeasonModel = require("./models/Season");
+const EpisodeModel = require("./models/Episode");
 
-Show.hasMany(Season, { foreignKey: "showId" });
-Season.belongsTo(Show, { foreignKey: "showId" });
+const Show = ShowModel(sequelize);
+const Season = SeasonModel(sequelize);
+const Episode = EpisodeModel(sequelize);
 
-Season.hasMany(Episode, { foreignKey: "seasonId" });
-Episode.belongsTo(Season, { foreignKey: "seasonId" });
+// Relationships
+Show.hasMany(Season, { foreignKey: { name: "showId", allowNull: false }, onDelete: "CASCADE" });
+Season.belongsTo(Show, { foreignKey: { name: "showId", allowNull: false } });
 
-async function setup() {
-  try {
-    await sequelize.sync({ force: true });
-    console.log("?? Database tables created!");
-    if (process.env.NODE_ENV !== "test") process.exit(0);
-  } catch (err) {
-    console.error("? Setup error:", err);
-    if (process.env.NODE_ENV !== "test") process.exit(1);
-  }
-}
-
-if (require.main === module) setup();
+Season.hasMany(Episode, { foreignKey: { name: "seasonId", allowNull: false }, onDelete: "CASCADE" });
+Episode.belongsTo(Season, { foreignKey: { name: "seasonId", allowNull: false } });
 
 module.exports = { sequelize, Show, Season, Episode };
